@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for a cleaner look, optional but nice for portfolios */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
