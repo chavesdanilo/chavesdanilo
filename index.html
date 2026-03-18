@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -69,32 +69,10 @@
       50% { transform: translateY(10px); }
     }
     .animate-bounce-custom { animation: bounce-scroll 2s ease-in-out infinite; }
-
-    /* Estilos do Carrossel */
-    .carousel-track {
-      overflow: hidden;
-      scroll-snap-type: x mandatory;
-    }
-    .carousel-slides {
-      display: flex;
-      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .carousel-slide {
-      flex-shrink: 0;
-      w-full;
-      scroll-snap-align: start;
-    }
-    .carousel-dot {
-      transition: all 0.3s ease;
-    }
-    .carousel-dot[data-active="true"] {
-      transform: scale(1.3);
-    }
   </style>
 </head>
 <body class="bg-black min-h-screen text-white font-sans selection:bg-neutral-800 selection:text-white">
 
-  <!-- NAV e HERO permanecem iguais -->
   <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 mix-blend-difference md:px-12 fade-up">
     <div class="flex items-center">
       <img src="logodanilo.png" alt="Danilo Chaves Logo" class="h-8 w-auto object-contain brightness-0 invert" onerror="this.style.display='none'"/>
@@ -106,11 +84,9 @@
     </div>
   </nav>
 
-  <!-- Hero Section (igual) -->
   <section class="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-black">
-    <!-- ... Hero content igual ao original ... -->
     <div id="hero-bg" class="absolute inset-0 z-0 bg-[#050505] transition-transform duration-75">
-      <div class="absolute inset-0 opacity-[0.15] mix-blend-screen z-20 pointer-events-none" style="background-image: url(&quot;image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E&quot;);"></div>
+      <div class="absolute inset-0 opacity-[0.15] mix-blend-screen z-20 pointer-events-none" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E&quot;);"></div>
       <div class="absolute -top-[20%] -left-[10%] w-[50vw] h-[50vw] bg-neutral-600/20 rounded-full blur-[120px] z-10 animate-pulse-1"></div>
       <div class="absolute top-[40%] -right-[10%] w-[60vw] h-[60vw] bg-neutral-500/10 rounded-full blur-[120px] z-10 animate-pulse-2"></div>
       <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black z-10"></div>
@@ -118,4 +94,251 @@
 
     <div class="relative z-10 flex flex-col items-center justify-center w-full px-6 text-center">
       <div class="flex flex-col items-center">
-        <img src="logodanilo.png" alt="Danilo Chaves Logo" class="w-full max-w
+        <img src="logodanilo.png" alt="Danilo Chaves Logo" class="w-full max-w-[300px] md:max-w-[500px] lg:max-w-[700px] h-auto object-contain brightness-0 invert fade-up" style="transition-delay: 200ms;" onerror="this.style.display='none'"/>
+        <div class="mt-8 md:mt-12 flex flex-wrap justify-center gap-4 md:gap-8 text-xs md:text-sm font-medium tracking-[0.2em] uppercase text-neutral-400 fade-up" style="transition-delay: 400ms;">
+          <span>Direção</span><span class="hidden md:inline">•</span>
+          <span>Produção</span><span class="hidden md:inline">•</span>
+          <span>Edição</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-neutral-500 text-xs tracking-widest uppercase fade-up" style="transition-delay: 800ms;">
+      <span>Scroll</span>
+      <div class="w-[1px] h-12 bg-gradient-to-b from-neutral-500 to-transparent animate-bounce-custom"></div>
+    </div>
+  </section>
+
+  <section id="about" class="py-32 px-6 md:px-12 lg:px-24 bg-black text-white">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
+      <div class="space-y-8 fade-up">
+        <h2 class="text-3xl md:text-5xl font-light tracking-tight">
+          Aos 26 anos, sou diretor, roteirista e filmmaker.
+        </h2>
+        <div class="space-y-6 text-neutral-400 text-lg leading-relaxed font-light">
+          <p>Atualmente, dirijo o <strong class="text-white font-medium">26 Collective</strong>. Dirigi e produzi, de forma independente, videoclipes de artistas nacionais e internacionais.</p>
+          <p>Iniciei no audiovisual como fotógrafo em 2016, e acabei adentrando para o mercado da tecnologia em 2019. Foi quando em 2023, meu coração voltou a bater mais forte para fazer o que amo, só que dessa vez em formato de vídeo.</p>
+          <p>Desde então sou aluno da <strong class="text-white font-medium">RECLEARNING</strong> e aluno vitalício na <strong class="text-white font-medium">SAND</strong>, duas das maiores e mais renomadas escolas do audiovisual; onde pude aprender e entender que entregar um excelente vídeo vai além do melhor equipamento; é história, técnica, processo e inteligência.</p>
+        </div>
+      </div>
+      <div class="relative aspect-[4/5] w-full max-w-md mx-auto lg:ml-auto fade-up">
+        <div class="absolute inset-0 bg-neutral-900 rounded-2xl overflow-hidden">
+          <img src="DANILOPROFILE.png" alt="Danilo Chaves" class="object-cover w-full h-full opacity-80 grayscale hover:grayscale-0 transition-all duration-700" onerror="this.style.display='none'"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="py-32 px-6 md:px-12 lg:px-24 bg-black">
+    <div class="max-w-7xl mx-auto space-y-32">
+      <div class="fade-up">
+        <h2 class="text-xs font-medium tracking-[0.2em] text-neutral-500 uppercase mb-4">Portfólio</h2>
+        <p class="text-4xl md:text-6xl font-light tracking-tight max-w-3xl">Projetos selecionados de direção, produção e edição.</p>
+      </div>
+
+      <div class="space-y-32">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center group fade-up">
+          <div class="w-full lg:w-3/5 overflow-hidden rounded-2xl bg-neutral-900 aspect-video relative">
+            <img src="COLLECTIVE26.png" alt="26 Collective" class="object-cover w-full h-full transition-transform duration-1000 ease-out group-hover:scale-110 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0" />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none"></div>
+          </div>
+          <div class="w-full lg:w-2/5 space-y-6">
+            <div class="space-y-2">
+              <p class="text-xs font-medium tracking-[0.2em] text-neutral-500 uppercase">Arte, atitude, movimento.</p>
+              <h3 class="text-3xl md:text-5xl font-medium tracking-tight">26 Collective</h3>
+            </div>
+            <p class="text-neutral-400 text-lg font-light leading-relaxed">Direção e produção independente de videoclipes de artistas nacionais e internacionais.</p>
+            <div class="pt-4">
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-medium tracking-widest uppercase hover:text-neutral-400 transition-colors group/btn">
+                Ver Projeto <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-16 items-center group fade-up">
+          <div class="w-full lg:w-3/5 overflow-hidden rounded-2xl bg-neutral-900 aspect-video relative">
+            <img src="MYSTICALBUM.png" alt="Mystic Álbum" class="object-cover w-full h-full transition-transform duration-1000 ease-out group-hover:scale-110 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0" />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none"></div>
+          </div>
+          <div class="w-full lg:w-2/5 space-y-6">
+            <div class="space-y-2">
+              <p class="text-xs font-medium tracking-[0.2em] text-neutral-500 uppercase">Thiago Barromeo & Soom T</p>
+              <h3 class="text-3xl md:text-5xl font-medium tracking-tight">Mystic Álbum</h3>
+            </div>
+            <p class="text-neutral-400 text-lg font-light leading-relaxed">Documentação da produção do álbum de Thiago Barromeo (nomeado ao Grammy Latino 2019), com participação da lenda do Reggae internacional, Soom T.</p>
+            <div class="pt-4">
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-medium tracking-widest uppercase hover:text-neutral-400 transition-colors group/btn">
+                Ver Projeto <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center group fade-up">
+          <div class="w-full lg:w-3/5 overflow-hidden rounded-2xl bg-neutral-900 aspect-video relative">
+            <iframe class="absolute top-0 left-0 w-full h-full scale-[1.15] pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-700" src="https://www.youtube.com/embed/DdKAeju9Q0U?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=DdKAeju9Q0U" title="J Coppa - No Love" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none"></div>
+          </div>
+          <div class="w-full lg:w-2/5 space-y-6">
+            <div class="space-y-2">
+              <p class="text-xs font-medium tracking-[0.2em] text-neutral-500 uppercase">Videoclipe Independente</p>
+              <h3 class="text-3xl md:text-5xl font-medium tracking-tight">J Coppa - No Love</h3>
+            </div>
+            <p class="text-neutral-400 text-lg font-light leading-relaxed">Fotografia e produção independente do videoclipe do aclamado artista de Hip-Hop Jamaicano durante sua passagem pelo Brasil.</p>
+            <div class="pt-4">
+              <a href="https://www.youtube.com/watch?v=DdKAeju9Q0U" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium tracking-widest uppercase hover:text-neutral-400 transition-colors group/btn">
+                Ver Projeto <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-16 items-center group fade-up">
+          <div class="w-full lg:w-3/5 overflow-hidden rounded-2xl bg-neutral-900 aspect-video relative">
+            <img src="CONEXAOHERMETICA.png" alt="Conexão Hermética" class="object-cover w-full h-full transition-transform duration-1000 ease-out group-hover:scale-110 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0" />
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none"></div>
+          </div>
+          <div class="w-full lg:w-2/5 space-y-6">
+            <div class="space-y-2">
+              <p class="text-xs font-medium tracking-[0.2em] text-neutral-500 uppercase">Documentário - SJ Thirteen</p>
+              <h3 class="text-3xl md:text-5xl font-medium tracking-tight">Conexão Hermética</h3>
+            </div>
+            <p class="text-neutral-400 text-lg font-light leading-relaxed">Roteiro, produção e edição do documentário sobre a produção do álbum do artista de Trap, com lançamento para o segundo semestre de 2026.</p>
+            <div class="pt-4">
+              <a href="#" class="inline-flex items-center gap-2 text-sm font-medium tracking-widest uppercase hover:text-neutral-400 transition-colors group/btn">
+                Ver Projeto <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center group fade-up">
+          <div class="w-full lg:w-3/5 overflow-hidden rounded-2xl bg-neutral-900 aspect-video relative">
+            <iframe class="absolute top-0 left-0 w-full h-full scale-[1.15] pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-700" src="https://www.youtube.com/embed/SVLiYK8PXEo?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=SVLiYK8PXEo" title="Notas de Cem" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none"></div>
+          </div>
+          <div class="w-full lg:w-2/5 space-y-6">
+            <div class="space-y-2">
+              <p class="text-xs font-medium tracking-[0.2em] text-neutral-500 uppercase">Videoclipe - SJ Thirteen</p>
+              <h3 class="text-3xl md:text-5xl font-medium tracking-tight">Notas de Cem</h3>
+            </div>
+            <p class="text-neutral-400 text-lg font-light leading-relaxed">Produção independente do videoclipe considerado por muitos o ponto de partida para a revolução do cenário de Trap nacional.</p>
+            <div class="pt-4">
+              <a href="https://www.youtube.com/watch?v=SVLiYK8PXEo" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium tracking-widest uppercase hover:text-neutral-400 transition-colors group/btn">
+                Ver Projeto <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center group fade-up">
+  <div class="w-full lg:w-3/5 overflow-hidden rounded-2xl bg-neutral-900 relative" style="aspect-ratio: 9/16;">
+    <iframe class="absolute top-0 left-0 w-full h-full scale-[1.15] pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity duration-700" 
+            src="https://www.youtube.com/embed/H7riievsLlE?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playlist=H7riievsLlE" 
+            title="DJ Batata'Killa" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+    </iframe>
+    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none"></div>
+  </div>
+  <div class="w-full lg:w-2/5 space-y-6">
+    <div class="space-y-2">
+      <p class="text-xs font-medium tracking-[0.2em] text-neutral-500 uppercase">Captação de Evento</p>
+      <h3 class="text-3xl md:text-5xl font-medium tracking-tight">DJ Batata'Killa</h3>
+    </div>
+    <p class="text-neutral-400 text-lg font-light leading-relaxed">Documentação da primeira edição do evento Barromeo Convida!</p>
+    <div class="pt-4">
+      <a href="https://www.youtube.com/shorts/H7riievsLlE" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium tracking-widest uppercase hover:text-neutral-400 transition-colors group/btn">
+        Ver Projeto <svg class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-32 px-6 md:px-12 lg:px-24 bg-neutral-950 text-white">
+    <div class="max-w-4xl mx-auto text-left space-y-12">
+      <h2 class="text-4xl md:text-7xl font-medium tracking-tight fade-up">Por que eu?</h2>
+      <p class="text-xl md:text-3xl font-light leading-relaxed text-neutral-300 fade-up">Como um profissional do audiovisual e da tecnologia, pude vivenciar e trabalhar diretamente com grandes e renomadas empresas multinacionais. </p>
+      <p class="text-xl md:text-3xl font-light leading-relaxed text-white fade-up">Contando comigo em seu time, terá à disposição um profissional com tato artístico e ampla visão de negócio.</p>
+    </div>
+  </section>
+
+  <footer id="contact" class="py-24 px-6 md:px-12 lg:px-24 bg-black text-white border-t border-white/10">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+      <div class="space-y-8 fade-up">
+        <h2 class="text-5xl md:text-7xl font-medium tracking-tight">Vamos criar<br />algo juntos.</h2>
+        <p class="text-neutral-400 text-lg font-light max-w-md">Disponível para projetos de direção, produção e edição. Entre em contato para discutirmos sua próxima ideia.</p>
+      </div>
+
+      <div class="flex flex-col justify-end space-y-8 md:items-end fade-up">
+        <div class="space-y-4">
+          <a href="mailto:danilochavesn@gmail.com" class="flex items-center gap-4 text-xl md:text-2xl font-light hover:text-neutral-400 transition-colors group">
+            <svg class="w-6 h-6 text-neutral-500 group-hover:text-white transition-colors" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            danilochavesn@gmail.com
+          </a>
+          <a href="tel:+5511990164016" class="flex items-center gap-4 text-xl md:text-2xl font-light hover:text-neutral-400 transition-colors group">
+            <svg class="w-6 h-6 text-neutral-500 group-hover:text-white transition-colors" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            (11) 99016-4016
+          </a>
+        </div>
+
+        <div class="flex gap-8 pt-8">
+          <a href="https://instagram.com/dvnillo" target="_blank" class="flex items-center gap-2 text-sm font-medium tracking-widest uppercase hover:text-neutral-400 transition-colors">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            @DVNILLO
+          </a>
+          <a href="https://instagram.com/dci3r" target="_blank" class="flex items-center gap-2 text-sm font-medium tracking-widest uppercase hover:text-neutral-400 transition-colors">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            @DCI3R
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium tracking-widest text-neutral-600 uppercase">
+      <p>© 2024 Danilo Chaves.</p>
+      <p>Direção, Produção e Edição.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Navbar aparecer na carga inicial
+      setTimeout(() => document.querySelector('nav').classList.add('visible'), 500);
+
+      // 2. Parallax do Fundo (Substituindo useScroll e useTransform)
+      const heroBg = document.getElementById('hero-bg');
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const maxScroll = window.innerHeight;
+        if (scrollY <= maxScroll) {
+          const yPos = (scrollY / maxScroll) * 50; 
+          const opacity = 1 - (scrollY / (maxScroll * 0.8));
+          heroBg.style.transform = ⁠ translateY(${yPos}%) ⁠;
+          heroBg.style.opacity = Math.max(0, opacity);
+        }
+      });
+
+      // 3. Efeitos de "Fade Up" ao scrollar (Substituindo whileInView do Framer Motion)
+      const observerOptions = { root: null, rootMargin: '-50px', threshold: 0.1 };
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target); // Roda a animação apenas uma vez (once: true)
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>
