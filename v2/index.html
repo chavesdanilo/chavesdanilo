@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Danilo Chaves — Direção · Fotografia · Edição</title>
+<meta name="description" content="Danilo Chaves (DVNILLO) — diretor, roteirista e filmmaker. Videoclipes e documentários: ideia, direção, câmera, edição e cor.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a; --fg:#ededed; --mute:#8a8a8a; --line:#222;
+    --blue:#2433ff; --red:#ff2b2b;
+    --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+    --pad:clamp(18px,4vw,48px);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+  body{background:var(--bg);color:var(--fg);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .mono{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+
+  /* grão de película sobre o site inteiro */
+  body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:90;opacity:.07;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain .5s steps(4) infinite}
+  @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
+
+  /* cabeçalho: fundo próprio para nunca cobrir títulos ao rolar */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+    padding:calc(env(safe-area-inset-top) + 14px) var(--pad) 14px;
+    background:linear-gradient(#0a0a0a 0%,rgba(10,10,10,.85) 70%,rgba(10,10,10,0));transition:transform .4s}
+  header.hide{transform:translateY(-100%)}
+  header .brand{display:flex;align-items:center;gap:10px}
+  header .brand img{height:22px;width:auto;filter:invert(0)}
+  header nav{display:flex;gap:18px}
+  header nav a{opacity:.75;transition:opacity .2s}
+  header nav a:hover{opacity:1}
+
+  /* HERO */
+  .hero{position:relative;height:100svh;min-height:560px;overflow:hidden;background:#000}
+  .hero .frames{position:absolute;inset:0}
+  .hero .frames img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:saturate(1.05) contrast(1.05)}
+  .hero .frames img.on{opacity:1}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+    background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 55%,rgba(0,0,0,.85) 100%),
+    repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
+  .hud{position:absolute;z-index:3;inset:0;pointer-events:none;padding:calc(env(safe-area-inset-top) + 64px) var(--pad) var(--pad)}
+  .hud .tl,.hud .tr{position:absolute;top:calc(env(safe-area-inset-top) + 64px)}
+  .hud .tl{left:var(--pad)} .hud .tr{right:var(--pad);text-align:right}
+  .rec{display:inline-flex;align-items:center;gap:8px}
+  .rec i{width:9px;height:9px;border-radius:50%;background:var(--red);animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .corner{position:absolute;width:22px;height:22px;border-color:rgba(255,255,255,.6);border-style:solid}
+  .c1{top:calc(env(safe-area-inset-top) + 100px);left:var(--pad);border-width:1px 0 0 1px}
+  .c2{top:calc(env(safe-area-inset-top) + 100px);right:var(--pad);border-width:1px 1px 0 0}
+  .c3{bottom:170px;left:var(--pad);border-width:0 0 1px 1px}
+  .c4{bottom:170px;right:var(--pad);border-width:0 1px 1px 0}
+  .hero .title{position:absolute;z-index:4;left:var(--pad);right:var(--pad);bottom:calc(var(--pad) + env(safe-area-inset-bottom))}
+  .hero .title img{width:min(560px,78vw);height:auto}
+  .hero .title p{margin-top:16px;color:#cfcfcf}
+  .hero .clipname{margin-top:6px;color:var(--mute)}
+
+  /* glitch RGB no logo (assinatura DVNILLO) */
+  .glitch{position:relative;display:inline-block}
+  .glitch img{position:relative;z-index:1}
+  .glitch img.r,.glitch img.c{position:absolute;inset:0;z-index:0;opacity:0;mix-blend-mode:screen}
+  .glitch img.r{filter:brightness(0) saturate(100%) invert(22%) sepia(98%) saturate(7000%) hue-rotate(355deg)}
+  .glitch img.c{filter:brightness(0) saturate(100%) invert(62%) sepia(90%) saturate(2000%) hue-rotate(160deg)}
+  .glitch.go img.r{opacity:.9;animation:gr .35s steps(2) 1}
+  .glitch.go img.c{opacity:.9;animation:gc .35s steps(2) 1}
+  .glitch.go img.base{animation:gb .35s steps(3) 1}
+  @keyframes gr{0%{transform:translate(-6px,1px);clip-path:inset(10% 0 55% 0)}50%{transform:translate(5px,-2px);clip-path:inset(60% 0 8% 0)}100%{transform:translate(-3px,0);clip-path:inset(30% 0 40% 0)}}
+  @keyframes gc{0%{transform:translate(6px,-1px);clip-path:inset(50% 0 20% 0)}50%{transform:translate(-5px,2px);clip-path:inset(5% 0 70% 0)}100%{transform:translate(3px,0);clip-path:inset(70% 0 5% 0)}}
+  @keyframes gb{0%{transform:translateX(2px)}50%{transform:translateX(-2px)}100%{transform:none}}
+
+  /* faixa de artistas */
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:18px 0}
+  .marquee .track{display:inline-flex;gap:48px;padding-left:48px;animation:mq 28s linear infinite}
+  .marquee span{font-weight:800;font-stretch:75%;font-size:clamp(22px,4vw,36px);text-transform:uppercase;letter-spacing:.01em}
+  .marquee em{font-style:normal;color:var(--blue)}
+  @keyframes mq{to{transform:translateX(-50%)}}
+
+  section{padding:clamp(64px,10vw,120px) var(--pad)}
+  .label{display:flex;justify-content:space-between;color:var(--mute);border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:28px}
+  h2{font-weight:800;font-stretch:70%;text-transform:uppercase;font-size:clamp(44px,11vw,120px);line-height:.9;letter-spacing:-.01em}
+
+  /* showreel */
+  .reel{margin-top:28px;position:relative;aspect-ratio:16/9;border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;background:#050505}
+  .reel .mono{color:var(--mute);text-align:center;line-height:2}
+  .reel b{display:block;font-family:var(--sans);font-weight:800;font-stretch:70%;font-size:clamp(28px,7vw,64px);color:var(--fg);letter-spacing:0}
+
+  /* trabalhos */
+  .cat{margin-top:56px}
+  .cat:first-of-type{margin-top:0}
+  .cat-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:22px}
+  .cat-head h3{font-weight:800;font-stretch:75%;text-transform:uppercase;font-size:clamp(28px,6vw,56px);line-height:1}
+  .grid{display:grid;grid-template-columns:1fr;gap:36px}
+  @media(min-width:820px){.grid{grid-template-columns:1fr 1fr;gap:40px 28px}}
+  .work{cursor:pointer;display:block}
+  .work .thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#111;border:1px solid var(--line)}
+  .work .thumb img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.16,1,.3,1)}
+  .work:hover .thumb img{transform:scale(1.04)}
+  .work .tc{position:absolute;left:10px;top:10px;color:#fff;background:rgba(0,0,0,.55);padding:4px 7px}
+  .work .play{position:absolute;right:10px;bottom:10px;color:#fff;background:rgba(0,0,0,.55);padding:4px 8px;display:flex;align-items:center;gap:6px}
+  .work .play::before{content:"";width:0;height:0;border-left:7px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent}
+  .work .soon{background:var(--blue)}
+  .work .soon::before{display:none}
+  .meta{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin-top:14px}
+  .meta .n{color:var(--mute)}
+  .work h4{font-weight:800;font-stretch:80%;text-transform:uppercase;font-size:clamp(22px,4.6vw,34px);line-height:1.02;margin-top:2px}
+  .work .who{color:#cfcfcf;margin-top:6px;font-size:15px}
+  .work .roles{color:var(--mute);margin-top:8px;line-height:1.7}
+
+  /* sobre */
+  .about{display:grid;gap:32px}
+  @media(min-width:820px){.about{grid-template-columns:5fr 7fr;align-items:end}}
+  .about figure{position:relative;border:1px solid var(--line)}
+  .about figure img{width:100%;aspect-ratio:3/4;object-fit:cover}
+  .about figcaption{position:absolute;left:10px;bottom:10px;color:#fff;background:rgba(0,0,0,.55);padding:4px 7px}
+  .about p{font-size:clamp(18px,2.4vw,24px);line-height:1.45;color:#d6d6d6;max-width:34ch}
+  .about p + p{margin-top:16px}
+  .about strong{color:var(--fg);font-weight:600}
+  .about .edu{margin-top:24px;color:var(--mute)}
+
+  /* contato */
+  .contact a.big{display:block;font-weight:800;font-stretch:70%;font-size:clamp(30px,8vw,84px);text-transform:uppercase;line-height:1;overflow-wrap:anywhere;border-bottom:1px solid var(--line);padding:18px 0;transition:color .2s}
+  .contact a.big:hover{color:var(--blue)}
+  .contact a.big small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mute);font-weight:400;margin-bottom:8px}
+
+  footer{padding:40px var(--pad) calc(28px + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;color:var(--mute);flex-wrap:wrap}
+
+  /* player */
+  .modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:var(--pad)}
+  .modal.open{display:flex}
+  .modal .box{width:min(1200px,100%);aspect-ratio:16/9;background:#000}
+  .modal iframe{width:100%;height:100%;border:0}
+  .modal button{position:absolute;top:calc(env(safe-area-inset-top) + 16px);right:var(--pad);background:none;border:1px solid #444;color:#fff;padding:8px 12px;cursor:pointer}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <a href="#top" class="brand" aria-label="Início"><img src="../logodanilo.png" alt="Danilo Chaves"></a>
+  <nav class="mono">
+    <a href="#trabalhos">Trabalhos</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</header>
+
+<!-- ABERTURA: troca de quadros como montagem; será substituída pelo vídeo de abertura quando chegar -->
+<div class="hero" id="top">
+  <div class="frames" id="frames"></div>
+  <div class="hud mono" aria-hidden="true">
+    <div class="tl"><span class="rec"><i></i>REC</span></div>
+    <div class="tr"><span id="tc">00:00:00:00</span><br><span style="opacity:.6">24 FPS · 16:9</span></div>
+    <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
+  </div>
+  <div class="title">
+    <div class="glitch" id="glitch">
+      <img class="r" src="../logodanilo.png" alt="" aria-hidden="true">
+      <img class="c" src="../logodanilo.png" alt="" aria-hidden="true">
+      <img class="base" src="../logodanilo.png" alt="Danilo Chaves">
+    </div>
+    <p class="mono">Direção · Roteiro · Fotografia · Edição · Cor</p>
+    <p class="mono clipname" id="clipname">&nbsp;</p>
+  </div>
+</div>
+
+<div class="marquee" aria-label="Artistas">
+  <div class="track" id="track">
+    <span>SJ13</span><span><em>/</em></span>
+    <span>J Coppa</span><span><em>/</em></span>
+    <span>Thiago Barromeo</span><span><em>/</em></span>
+    <span>Soom T</span><span><em>/</em></span>
+    <span>Yang Neno</span><span><em>/</em></span>
+    <span>26 Collective</span><span><em>/</em></span>
+  </div>
+</div>
+
+<!-- SHOWREEL (provisório até o reel ficar pronto) -->
+<section id="reel">
+  <div class="label mono"><span>01 — Showreel</span><span>2026</span></div>
+  <h2 class="reveal">Diretor,<br>roteirista &amp;<br>filmmaker</h2>
+  <div class="reel reveal">
+    <div class="mono">Showreel 2026<b>Em montagem</b>Disponível em breve</div>
+  </div>
+</section>
+
+<section id="trabalhos">
+  <div class="label mono"><span>02 — Trabalhos</span><span id="count"></span></div>
+
+  <div class="cat">
+    <div class="cat-head"><h3 class="reveal">Videoclipes</h3><span class="mono" style="color:var(--mute)">Cat. A</span></div>
+    <div class="grid" id="g-clipes"></div>
+  </div>
+
+  <div class="cat">
+    <div class="cat-head"><h3 class="reveal">Documentário</h3><span class="mono" style="color:var(--mute)">Cat. B</span></div>
+    <div class="grid" id="g-doc"></div>
+  </div>
+</section>
+
+<section id="sobre">
+  <div class="label mono"><span>03 — Sobre</span><span>São Paulo · BR</span></div>
+  <div class="about">
+    <figure class="reveal">
+      <img src="../DANILOPROFILE.png" alt="Danilo Chaves">
+      <figcaption class="mono">DC — Arquivo</figcaption>
+    </figure>
+    <div class="reveal">
+      <p>Sou <strong>Danilo Chaves</strong> — DVNILLO. Diretor, roteirista e filmmaker.</p>
+      <p>Comecei como fotógrafo em 2016, passei pela tecnologia em 2019 e voltei ao audiovisual em 2023. Nos meus projetos, cuido de tudo: ideia, direção, câmera, edição e cor.</p>
+      <p>Dirijo o <strong>26 Collective</strong>.</p>
+      <p class="mono edu">Formação — Reclearning · SAND</p>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="contact">
+  <div class="label mono"><span>04 — Contato</span><span>Disponível para projetos</span></div>
+  <a class="big" href="mailto:danilochavesn@gmail.com" style="font-size:clamp(22px,6.2vw,84px)"><small>E-mail</small>danilochavesn@gmail.com</a>
+  <a class="big" href="https://wa.me/5511990164016" target="_blank" rel="noopener"><small>WhatsApp</small>+55 11 99016-4016</a>
+  <a class="big" href="https://instagram.com/dvnillo" target="_blank" rel="noopener"><small>Instagram</small>@dvnillo</a>
+  <a class="big" href="https://instagram.com/dci3r" target="_blank" rel="noopener"><small>Instagram</small>@dci3r</a>
+</section>
+
+<footer class="mono">
+  <span>© <span id="yr">2026</span> Danilo Chaves</span>
+  <span>DVNILLO — Fim do rolo</span>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Player">
+  <button class="mono" id="close">Fechar ✕</button>
+  <div class="box" id="box"></div>
+</div>
+
+<script>
+/* ---- DADOS: edite aqui para adicionar/alterar trabalhos ---- */
+const yt = id => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+const WORKS = {
+  clipes: [
+    { title:"Lavando Dinheiro", who:"SJ13 ft. Yang Neno", year:"2026", yt:"EEyaq8__-ZI",
+      roles:"Direção · Roteiro · Fotografia · Câmera · Edição · Color" },
+    { title:"Criado na Zona Sul / Filha do Bacana", who:"SJ13", year:"2026", yt:"nA3QzhgCQ_M",
+      roles:"Direção · Roteiro · Fotografia · Câmera · Edição · Color" },
+    { title:"Notas de Cem", who:"SJ13", year:"", yt:"SVLiYK8PXEo",
+      roles:"Produção" },
+    { title:"No Love", who:"J Coppa", year:"", yt:"DdKAeju9Q0U",
+      roles:"Fotografia · Produção" },
+  ],
+  doc: [
+    { title:"Conexão Hermética", who:"SJ13 — o processo do álbum", year:"2026", img:"../CONEXAOHERMETICA.png",
+      roles:"Roteiro · Produção · Edição", soon:"Lançamento 2º sem. 2026" },
+    { title:"Mystic Álbum", who:"Thiago Barromeo & Soom T", year:"", img:"../MYSTICALBUM.png",
+      roles:"Documentação da produção do álbum" },
+  ]
+};
+
+/* ---- cards ---- */
+let n = 0;
+function card(w){
+  n++;
+  const el = document.createElement(w.yt ? 'a' : 'div');
+  el.className = 'work reveal';
+  if (w.yt){ el.href = `https://youtu.be/${w.yt}`; el.dataset.yt = w.yt; }
+  const src = w.yt ? yt(w.yt) : w.img;
+  const tag = w.yt ? `<span class="play mono">Assistir</span>` : (w.soon ? `<span class="play soon mono">${w.soon}</span>` : '');
+  el.innerHTML = `
+    <div class="thumb">
+      <img loading="lazy" src="${src}" alt="${w.title}" ${w.yt ? `onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${w.yt}/hqdefault.jpg'"` : ''}>
+      <span class="tc mono">ROLO ${String(n).padStart(2,'0')}</span>${tag}
+    </div>
+    <div class="meta">
+      <span class="mono n">${String(n).padStart(2,'0')}</span>
+      <div>
+        <h4>${w.title}</h4>
+        <div class="who">${w.who}${w.year ? ' — ' + w.year : ''}</div>
+        <div class="roles mono">${w.roles}</div>
+      </div>
+    </div>`;
+  return el;
+}
+WORKS.clipes.forEach(w => document.getElementById('g-clipes').appendChild(card(w)));
+WORKS.doc.forEach(w => document.getElementById('g-doc').appendChild(card(w)));
+document.getElementById('count').textContent = String(n).padStart(2,'0') + ' trabalhos';
+
+/* ---- player em tela cheia ---- */
+const modal = document.getElementById('modal'), box = document.getElementById('box');
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-yt]'); if (!a) return;
+  e.preventDefault();
+  box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${a.dataset.yt}?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  modal.classList.add('open');
+});
+function closeModal(){ modal.classList.remove('open'); box.innerHTML=''; }
+document.getElementById('close').onclick = closeModal;
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ---- abertura: montagem de quadros (provisória) ---- */
+const FRAMES = [
+  { src: yt('EEyaq8__-ZI'), name:'Lavando Dinheiro — SJ13 ft. Yang Neno' },
+  { src: yt('nA3QzhgCQ_M'), name:'Criado na Zona Sul — SJ13' },
+  { src: '../CONEXAOHERMETICA.png', name:'Conexão Hermética — SJ13' },
+  { src: yt('SVLiYK8PXEo'), name:'Notas de Cem — SJ13' },
+  { src: '../MYSTICALBUM.png', name:'Mystic Álbum — Thiago Barromeo & Soom T' },
+  { src: yt('DdKAeju9Q0U'), name:'No Love — J Coppa' },
+];
+const fr = document.getElementById('frames'), cn = document.getElementById('clipname');
+const imgs = FRAMES.map(f => { const i = new Image(); i.src = f.src; i.alt=''; fr.appendChild(i); return i; });
+let k = 0;
+function cut(){
+  imgs.forEach(i => i.classList.remove('on'));
+  imgs[k].classList.add('on');
+  cn.textContent = '▶ ' + FRAMES[k].name;
+  k = (k + 1) % imgs.length;
+}
+cut(); setInterval(cut, 1400);
+
+/* ---- timecode a 24 fps ---- */
+const tc = document.getElementById('tc'), t0 = performance.now();
+const p2 = v => String(v).padStart(2,'0');
+(function tick(){
+  const f = Math.floor((performance.now() - t0) / (1000/24));
+  tc.textContent = `${p2(Math.floor(f/86400)%24)}:${p2(Math.floor(f/1440)%60)}:${p2(Math.floor(f/24)%60)}:${p2(f%24)}`;
+  requestAnimationFrame(tick);
+})();
+
+/* ---- glitch ocasional no logo ---- */
+const g = document.getElementById('glitch');
+function glitch(){ g.classList.remove('go'); void g.offsetWidth; g.classList.add('go'); setTimeout(glitch, 2200 + Math.random()*2800); }
+setTimeout(glitch, 900);
+
+/* ---- faixa de artistas contínua ---- */
+const tr = document.getElementById('track'); tr.innerHTML += tr.innerHTML;
+
+/* ---- cabeçalho some ao descer, volta ao subir ---- */
+let last = 0; const hdr = document.getElementById('hdr');
+addEventListener('scroll', () => { const y = scrollY; hdr.classList.toggle('hide', y > last && y > 120); last = y; }, {passive:true});
+
+/* ---- revelação ao rolar ---- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
