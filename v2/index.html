@@ -45,7 +45,9 @@
   .hero{position:relative;height:100svh;min-height:560px;overflow:hidden;background:#000}
   .hero .frames{position:absolute;inset:0}
   .hero .frames img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:saturate(1.05) contrast(1.05)}
-  .hero .frames img.on{opacity:1}
+  .hero .frames img.on{opacity:1;animation:kb 1.6s linear forwards}
+  @keyframes kb{from{transform:scale(1.18) translate(2%,1%)}to{transform:scale(1.02) translate(-1%,-1%)}}
+  .hero .frames.flash::after{content:"";position:absolute;inset:0;background:#fff;opacity:.12;mix-blend-mode:screen}
   .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .hero::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
     background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 55%,rgba(0,0,0,.85) 100%),
@@ -223,10 +225,10 @@
       <figcaption class="mono">DC — Arquivo</figcaption>
     </figure>
     <div class="reveal">
-      <p>Sou <strong>Danilo Chaves</strong> — DVNILLO. Diretor, roteirista e filmmaker.</p>
-      <p>Comecei como fotógrafo em 2016, passei pela tecnologia em 2019 e voltei ao audiovisual em 2023. Nos meus projetos, cuido de tudo: ideia, direção, câmera, edição e cor.</p>
-      <p>Dirijo o <strong>26 Collective</strong>.</p>
-      <p class="mono edu">Formação — Reclearning · SAND</p>
+      <p><strong>Ninguém me entregou o caminho.</strong> Aprendi na prática — câmera na mão, tentativa, erro e insistência.</p>
+      <p>Comecei fotografando em 2016. Em 2019, deixei o sonho de lado e entrei na tecnologia. Mas o audiovisual nunca foi embora: em 2023 ele me chamou de volta, e eu não consegui dizer não.</p>
+      <p>Hoje vivo nos dois mundos — e é isso que me diferencia. A tecnologia me deu método, processo e visão; o audiovisual me dá o motivo. Da ideia à cor, cuido de cada etapa.</p>
+      <p>Sou <strong>Danilo Chaves</strong> — DVNILLO. Dirijo o <strong>26 Collective</strong>.</p>
     </div>
   </div>
 </section>
@@ -259,15 +261,15 @@ const WORKS = {
     { title:"Criado na Zona Sul / Filha do Bacana", who:"SJ13", year:"2026", yt:"nA3QzhgCQ_M",
       roles:"Direção · Roteiro · Fotografia · Câmera · Edição · Color" },
     { title:"Notas de Cem", who:"SJ13", year:"", yt:"SVLiYK8PXEo",
-      roles:"Produção" },
+      roles:"Direção · Roteiro · Fotografia · Câmera · Edição · Color" },
     { title:"No Love", who:"J Coppa", year:"", yt:"DdKAeju9Q0U",
-      roles:"Fotografia · Produção" },
+      roles:"Direção · Roteiro · Fotografia · Câmera · Edição · Color" },
   ],
   doc: [
-    { title:"Conexão Hermética", who:"SJ13 — o processo do álbum", year:"2026", img:"../CONEXAOHERMETICA.png",
-      roles:"Roteiro · Produção · Edição", soon:"Lançamento 2º sem. 2026" },
-    { title:"Mystic Álbum", who:"Thiago Barromeo & Soom T", year:"", img:"../MYSTICALBUM.png",
-      roles:"Documentação da produção do álbum" },
+    { title:"Conexão Hermética", who:"SJ13 — o processo do álbum", year:"2027", img:"../CONEXAOHERMETICA.png",
+      roles:"Roteiro · Produção · Edição", soon:"Lançamento 1º sem. 2027" },
+    { title:"Mystic Álbum", who:"Thiago Barromeo & Soom T", year:"2027", img:"../MYSTICALBUM.png",
+      roles:"Documentário sobre a produção do álbum", soon:"Lançamento 1º sem. 2027" },
   ]
 };
 
@@ -312,6 +314,8 @@ document.getElementById('close').onclick = closeModal;
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+const g = document.getElementById('glitch');
+function glitch1(){ g.classList.remove('go'); void g.offsetWidth; g.classList.add('go'); }
 /* ---- abertura: montagem de quadros (provisória) ---- */
 const FRAMES = [
   { src: yt('EEyaq8__-ZI'), name:'Lavando Dinheiro — SJ13 ft. Yang Neno' },
@@ -328,6 +332,8 @@ function cut(){
   imgs.forEach(i => i.classList.remove('on'));
   imgs[k].classList.add('on');
   cn.textContent = '▶ ' + FRAMES[k].name;
+  fr.classList.add('flash'); setTimeout(()=>fr.classList.remove('flash'), 60);
+  if (k % 2 === 0) glitch1();
   k = (k + 1) % imgs.length;
 }
 cut(); setInterval(cut, 1400);
@@ -342,8 +348,7 @@ const p2 = v => String(v).padStart(2,'0');
 })();
 
 /* ---- glitch ocasional no logo ---- */
-const g = document.getElementById('glitch');
-function glitch(){ g.classList.remove('go'); void g.offsetWidth; g.classList.add('go'); setTimeout(glitch, 2200 + Math.random()*2800); }
+function glitch(){ glitch1(); setTimeout(glitch, 2200 + Math.random()*2800); }
 setTimeout(glitch, 900);
 
 /* ---- faixa de artistas contínua ---- */
