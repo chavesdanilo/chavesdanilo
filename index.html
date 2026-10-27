@@ -113,11 +113,11 @@
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
       <div class="space-y-8 fade-up">
         <h2 class="text-3xl md:text-5xl font-light tracking-tight">
-          Aos 26 anos, sou diretor, roteirista e filmmaker.
+          Sou diretor, roteirista e filmmaker.
         </h2>
         <div class="space-y-6 text-neutral-400 text-lg leading-relaxed font-light">
           <p>Atualmente, dirijo o <strong class="text-white font-medium">26 Collective</strong>. Dirigi e produzi, de forma independente, videoclipes de artistas nacionais e internacionais.</p>
-          <p>Iniciei no audiovisual como fotógrafo em 2016, e acabei adentrando para o mercado da tecnologia em 2019. Foi quando em 2023, meu coração voltou a bater mais forte para fazer o que amo, só que dessa vez em formato de vídeo.</p>
+          <p>Comecei no audiovisual como fotógrafo em 2016 e, em 2019, entrei no mercado de tecnologia. Em 2023, meu coração voltou a bater mais forte pelo que amo — dessa vez, em formato de vídeo.</p>
           <p>Desde então sou aluno da <strong class="text-white font-medium">RECLEARNING</strong> e aluno vitalício na <strong class="text-white font-medium">SAND</strong>, duas das maiores e mais renomadas escolas do audiovisual; onde pude aprender e entender que entregar um excelente vídeo vai além do melhor equipamento; é história, técnica, processo e inteligência.</p>
         </div>
       </div>
@@ -277,13 +277,14 @@
     </div>
     
     <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium tracking-widest text-neutral-600 uppercase">
-      <p>© 2024 Danilo Chaves.</p>
+      <p>© <span id="year">2026</span> Danilo Chaves.</p>
       <p>Direção, Produção e Edição.</p>
     </div>
   </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("year").textContent = new Date().getFullYear();
       // 1. Navbar aparecer na carga inicial
       setTimeout(() => document.querySelector('nav').classList.add('visible'), 500);
 
