@@ -167,9 +167,10 @@
 <!-- ABERTURA: troca de quadros como montagem; será substituída pelo vídeo de abertura quando chegar -->
 <div class="hero" id="top">
   <div class="frames" id="frames"></div>
+  <video id="herovid" muted playsinline autoplay loop preload="auto" poster="media/hero_h.jpg"></video>
   <div class="hud mono" aria-hidden="true">
     <div class="tl"><span class="rec"><i></i>REC</span></div>
-    <div class="tr"><span id="tc">00:00:00:00</span><br><span style="opacity:.6">24 FPS · 16:9</span></div>
+    <div class="tr"><span id="tc">00:00:00:00</span><br><span style="opacity:.6" id="fmt">25 FPS · 16:9</span></div>
     <span class="corner c1"></span><span class="corner c2"></span><span class="corner c3"></span><span class="corner c4"></span>
   </div>
   <div class="title">
@@ -317,34 +318,34 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 const g = document.getElementById('glitch');
 function glitch1(){ g.classList.remove('go'); void g.offsetWidth; g.classList.add('go'); }
-/* ---- abertura: montagem de quadros (provisória) ---- */
-const FRAMES = [
-  { src: yt('EEyaq8__-ZI'), name:'Lavando Dinheiro — SJ13 ft. Yang Neno' },
-  { src: yt('nA3QzhgCQ_M'), name:'Criado na Zona Sul — SJ13' },
-  { src: '../CONEXAOHERMETICA.png', name:'Conexão Hermética — SJ13' },
-  { src: yt('SVLiYK8PXEo'), name:'Notas de Cem — SJ13' },
-  { src: '../MYSTICALBUM.png', name:'Mystic Álbum — Thiago Barromeo & Soom T' },
-  { src: yt('DdKAeju9Q0U'), name:'No Love — J Coppa' },
-];
+/* ---- abertura: montagem em vídeo (vertical no celular, horizontal no computador) ---- */
 const fr = document.getElementById('frames'), cn = document.getElementById('clipname');
-const imgs = FRAMES.map(f => { const i = new Image(); i.src = f.src; i.alt=''; fr.appendChild(i); return i; });
-let k = 0;
-function cut(){
-  imgs.forEach(i => i.classList.remove('on'));
-  imgs[k].classList.add('on');
-  cn.textContent = '▶ ' + FRAMES[k].name;
-  fr.classList.add('flash'); setTimeout(()=>fr.classList.remove('flash'), 60);
-  if (k % 2 === 0) glitch1();
-  k = (k + 1) % imgs.length;
-}
-cut(); setInterval(cut, 1400);
+const hv = document.getElementById('herovid');
+const vertical = matchMedia('(max-aspect-ratio: 1/1)').matches;
+hv.poster = vertical ? 'media/hero_v.jpg' : 'media/hero_h.jpg';
+hv.src = vertical ? 'media/hero_v.mp4' : 'media/hero_h.mp4';
+hv.play().catch(()=>{});
+document.getElementById('fmt').textContent = '25 FPS · ' + (vertical ? '9:16' : '16:9');
+const CUT = 1.2;
+const SEQ = ['FB','FB','LD','FB','FB','LD','FB','FB','LD'];
+const NAMES = { FB:'Criado na Zona Sul / Filha do Bacana — SJ13', LD:'Lavando Dinheiro — SJ13 ft. Yang Neno' };
+let lastSeg = -1;
+(function sync(){
+  const seg = Math.floor((hv.currentTime || 0) / CUT) % SEQ.length;
+  if (seg !== lastSeg){
+    lastSeg = seg;
+    cn.textContent = '▶ ' + NAMES[SEQ[seg]];
+    if (seg % 3 === 0) glitch1();
+  }
+  requestAnimationFrame(sync);
+})();
 
 /* ---- timecode a 24 fps ---- */
 const tc = document.getElementById('tc'), t0 = performance.now();
 const p2 = v => String(v).padStart(2,'0');
 (function tick(){
-  const f = Math.floor((performance.now() - t0) / (1000/24));
-  tc.textContent = `${p2(Math.floor(f/86400)%24)}:${p2(Math.floor(f/1440)%60)}:${p2(Math.floor(f/24)%60)}:${p2(f%24)}`;
+  const f = Math.floor((performance.now() - t0) / (1000/25));
+  tc.textContent = `${p2(Math.floor(f/90000)%24)}:${p2(Math.floor(f/1500)%60)}:${p2(Math.floor(f/25)%60)}:${p2(f%25)}`;
   requestAnimationFrame(tick);
 })();
 
