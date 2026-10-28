@@ -113,6 +113,15 @@
   .work .play::before{content:"";width:0;height:0;border-left:7px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent}
   .work .soon{background:var(--blue)}
   .work .soon::before{display:none}
+  .slides{position:absolute;inset:0}
+  .slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;opacity:0;transition:opacity .5s}
+  .slides img.on{opacity:1;animation:kb 3s linear forwards}
+  .work .count{position:absolute;right:10px;top:10px;color:#fff;background:rgba(0,0,0,.55);padding:4px 7px}
+  .gal{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;width:100%;height:min(82svh,100%);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .gal::-webkit-scrollbar{display:none}
+  .gal img{height:100%;width:auto;max-width:88vw;object-fit:contain;scroll-snap-align:center;flex:none}
+  .modal .box.g{aspect-ratio:auto;height:82svh;background:none;display:flex;align-items:center}
+  .modal .gcount{position:absolute;left:var(--pad);right:120px;line-height:1.6;top:calc(env(safe-area-inset-top) + 22px);color:#fff}
   .meta{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin-top:14px}
   .meta .n{color:var(--mute)}
   .work h4{font-weight:800;font-stretch:80%;text-transform:uppercase;font-size:clamp(22px,4.6vw,34px);line-height:1.02;margin-top:2px}
@@ -190,6 +199,7 @@
     <span>J Coppa</span><span><em>/</em></span>
     <span>Thiago Barromeo</span><span><em>/</em></span>
     <span>Soom T</span><span><em>/</em></span>
+    <span>BNegão</span><span><em>/</em></span>
     <span>Yang Neno</span><span><em>/</em></span>
     <span>26 Collective</span><span><em>/</em></span>
   </div>
@@ -270,7 +280,8 @@ const WORKS = {
   doc: [
     { title:"Conexão Hermética", who:"SJ13 — o processo do álbum", year:"2027", img:"../CONEXAOHERMETICA.png",
       roles:"Roteiro · Produção · Edição", soon:"Lançamento 1º sem. 2027" },
-    { title:"Mystic Álbum", who:"Thiago Barromeo & Soom T", year:"2027", img:"../MYSTICALBUM.png",
+    { title:"Mystic Álbum", who:"Thiago Barromeo & Soom T — part. BNegão", year:"2027", img:"../MYSTICALBUM.png",
+      gallery: Array.from({length:11}, (_,i) => `media/mystic/${String(i+1).padStart(2,'0')}.jpg`),
       roles:"Documentário sobre a produção do álbum", soon:"Lançamento 1º sem. 2027" },
   ]
 };
@@ -283,10 +294,12 @@ function card(w){
   el.className = 'work reveal';
   if (w.yt){ el.href = `https://youtu.be/${w.yt}`; el.dataset.yt = w.yt; }
   const src = w.yt ? yt(w.yt) : w.img;
-  const tag = w.yt ? `<span class="play mono">Assistir</span>` : (w.soon ? `<span class="play soon mono">${w.soon}</span>` : '');
+  if (w.gallery){ el.dataset.gallery = '1'; el._gallery = w.gallery; el.setAttribute('role','button'); el.tabIndex = 0; }
+  const tag = w.yt ? `<span class="play mono">Assistir</span>` : w.gallery ? `<span class="play soon mono">Ver bastidores · ${w.soon}</span>` : (w.soon ? `<span class="play soon mono">${w.soon}</span>` : '');
   el.innerHTML = `
     <div class="thumb">
-      <img loading="lazy" src="${src}" alt="${w.title}" ${w.yt ? `onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${w.yt}/hqdefault.jpg'"` : ''}>
+      ${w.gallery ? `<div class="slides">${w.gallery.map((g,i)=>`<img loading="lazy" src="${g}" alt="${w.title} — bastidor ${i+1}"${i===0?' class="on"':''}>`).join('')}</div><span class="count mono">01 / ${String(w.gallery.length).padStart(2,'0')}</span>` : ''}
+      <img loading="lazy" src="${src}" alt="${w.title}" ${w.gallery ? 'style="display:none"' : ''} ${w.yt ? `onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${w.yt}/hqdefault.jpg'"` : ''}>
       <span class="tc mono">ROLO ${String(n).padStart(2,'0')}</span>${tag}
     </div>
     <div class="meta">
@@ -303,15 +316,30 @@ WORKS.clipes.forEach(w => document.getElementById('g-clipes').appendChild(card(w
 WORKS.doc.forEach(w => document.getElementById('g-doc').appendChild(card(w)));
 document.getElementById('count').textContent = String(n).padStart(2,'0') + ' trabalhos';
 
+/* ---- carrossel do Mystic ---- */
+document.querySelectorAll('[data-gallery]').forEach(card => {
+  const imgs = card.querySelectorAll('.slides img'), cnt = card.querySelector('.count'); let i = 0;
+  setInterval(() => {
+    imgs[i].classList.remove('on'); i = (i + 1) % imgs.length;
+    imgs[i].classList.remove('on'); void imgs[i].offsetWidth; imgs[i].classList.add('on');
+    cnt.textContent = String(i+1).padStart(2,'0') + ' / ' + String(imgs.length).padStart(2,'0');
+  }, 2600);
+});
 /* ---- player em tela cheia ---- */
 const modal = document.getElementById('modal'), box = document.getElementById('box');
 document.addEventListener('click', e => {
+  const gcard = e.target.closest('[data-gallery]');
+  if (gcard){
+    box.classList.add('g');
+    box.innerHTML = `<span class="gcount mono">${gcard.querySelector('h4').textContent} <br>Bastidores · deslize →</span><div class="gal">${gcard._gallery.map(g=>`<img src="${g}" alt="">`).join('')}</div>`;
+    modal.classList.add('open'); return;
+  }
   const a = e.target.closest('[data-yt]'); if (!a) return;
   e.preventDefault();
   box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${a.dataset.yt}?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
   modal.classList.add('open');
 });
-function closeModal(){ modal.classList.remove('open'); box.innerHTML=''; }
+function closeModal(){ modal.classList.remove('open'); box.innerHTML=''; box.classList.remove('g'); }
 document.getElementById('close').onclick = closeModal;
 modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
